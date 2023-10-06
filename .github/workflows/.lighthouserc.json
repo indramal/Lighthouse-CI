@@ -9,7 +9,7 @@
       }
     },
     "upload": {
-      "target": "lhci"
+      "target": "filesystem"
     }
   }
 }
