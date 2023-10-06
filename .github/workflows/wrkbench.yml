@@ -16,6 +16,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y wrk
 
+      - name: Create Benchmark Directory
+        run: |
+          # Create a directory to store benchmark results
+          mkdir -p benchmark-results
+
       - name: Run API Benchmarks
         run: |
           # Run wrk with the benchmark.lua script
