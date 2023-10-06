@@ -19,7 +19,7 @@ jobs:
       - name: Run API Benchmarks
         run: |
           # Run wrk with the benchmark.lua script
-          wrk -s .github/workflows/benchmark.lua http://kada.lk -o benchmark-results/results.txt
+          wrk -s .github/workflows/benchmark.lua http://kada.lk > benchmark-results/results.txt
 
       - name: Save Benchmark Results
         uses: actions/upload-artifact@v2
