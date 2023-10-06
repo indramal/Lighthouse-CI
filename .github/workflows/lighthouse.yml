@@ -37,3 +37,5 @@ jobs:
         with:
           name: lighthouse-report
           path: report/lighthouse-report
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+          retention-days: 5

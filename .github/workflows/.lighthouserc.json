@@ -9,7 +9,7 @@
       }
     },
     "upload": {
-      "target": "filesystem",
+      "target": ["filesystem", "temporary-public-storage"],
       "outputDir": "report/lighthouse-report"
     }
   }
