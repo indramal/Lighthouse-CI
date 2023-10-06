@@ -23,7 +23,7 @@ jobs:
           # Loop through each URL and run the benchmark
           for url in "${urls[@]}"; do
             echo "Benchmarking $url"
-            wrk -t1 -c1 -d10s "$url" >> result.txt
+            wrk -t1 -c1 -d30s "$url" >> result.txt
             echo "Waiting for 10 seconds before the next test..."
             sleep 10
           done
