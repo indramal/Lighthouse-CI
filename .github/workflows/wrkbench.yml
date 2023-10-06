@@ -1,9 +1,6 @@
 name: API Benchmark
 
-on:
-  push:
-    branches:
-      - main # Customize this branch name
+on: [push]
 
 jobs:
   benchmark:
