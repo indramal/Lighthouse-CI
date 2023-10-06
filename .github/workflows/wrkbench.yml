@@ -1,6 +1,9 @@
-name: WRK Benchmark Test
+name: WRK Benchmark
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   benchmark:
@@ -17,13 +20,13 @@ jobs:
 
       - name: Run WRK Benchmark
         run: |
-          # Define your list of URLs to benchmark
-          urls=("https://kada.lk" "https://www.kada.lk/Service/" "https://www.kada.lk/Privacy_Policy/")
+          # Read the list of URLs from urls.txt into an array
+          mapfile -t urls < urls.txt
 
           # Loop through each URL and run the benchmark
           for url in "${urls[@]}"; do
             echo "Benchmarking $url"
-            wrk -t1 -c10 -d10s "$url" >> result.txt
+            wrk -t1 -c1 -d10s "$url" >> result.txt
             echo "Waiting for 10 seconds before the next test..."
             sleep 10
           done
