@@ -1,9 +1,6 @@
 name: WRK Benchmark Test
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   benchmark:
