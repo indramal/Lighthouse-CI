@@ -1,0 +1,31 @@
+name: API Benchmark
+
+on:
+  push:
+    branches:
+      - main # Customize this branch name
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install wrk
+        run: |
+          # Install wrk on the runner
+          sudo apt-get update
+          sudo apt-get install -y wrk
+
+      - name: Run API Benchmarks
+        run: |
+          # Run wrk with the benchmark.lua script
+          wrk -s .github/workflows/benchmark.lua http://kada.lk | tee benchmark-results/results.txt
+
+      - name: Save Benchmark Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: benchmark-results
+          path: benchmark-results/results.txt # Path to the directory or file you want to save as an artifact
