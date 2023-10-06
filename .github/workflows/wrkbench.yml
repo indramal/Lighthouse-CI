@@ -18,7 +18,7 @@ jobs:
       - name: Run WRK Benchmark
         run: |
           # Read the list of URLs from urls.txt into an array
-          mapfile -t urls < urls.txt
+          mapfile -t urls < .github/workflows/urls.txt
 
           # Loop through each URL and run the benchmark
           for url in "${urls[@]}"; do
