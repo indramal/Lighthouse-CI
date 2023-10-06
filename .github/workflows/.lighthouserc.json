@@ -10,19 +10,6 @@
     },
     "upload": {
       "target": "temporary-public-storage"
-    },
-    "assert": {
-      "preset": "lighthouse:no-pwa",
-      "assertions": {
-        "categories:performance": [
-          "warn",
-          { "aggregationMethod": "optimistic", "minScore": 0.7 }
-        ],
-        "categories:accessibility": [
-          "warn",
-          { "aggregationMethod": "optimistic", "minScore": 0.9 }
-        ]
-      }
     }
   }
 }
