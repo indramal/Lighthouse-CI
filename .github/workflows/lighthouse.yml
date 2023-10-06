@@ -16,3 +16,5 @@ jobs:
           npm install -g @lhci/cli@0.12.x
           lhci healthcheck
           lhci autorun --config=.github/workflows/.lighthouserc.json || echo "Fail"
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
