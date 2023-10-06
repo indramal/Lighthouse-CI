@@ -9,7 +9,8 @@
       }
     },
     "upload": {
-      "target": "filesystem"
+      "target": "filesystem",
+      "outputDir": "report/lighthouse-report"
     }
   }
 }
