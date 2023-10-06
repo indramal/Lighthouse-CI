@@ -1,33 +1,38 @@
-name: API Benchmark
+name: WRK Benchmark
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   benchmark:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install wrk
         run: |
-          # Install wrk on the runner
-          sudo apt-get update
+          sudo apt-get update -q
           sudo apt-get install -y wrk
 
-      - name: Create Benchmark Directory
+      - name: Run WRK Benchmark
         run: |
-          # Create a directory to store benchmark results
-          mkdir -p benchmark-results
+          # Define your list of URLs to benchmark
+          urls=("https://kada.lk" "https://www.kada.lk/Service/" "https://www.kada.lk/Privacy_Policy/")
 
-      - name: Run API Benchmarks
-        run: |
-          # Run wrk with the benchmark.lua script
-          wrk -s benchmark.lua http://kada.lk > benchmark-results/results.txt
+          # Loop through each URL and run the benchmark
+          for url in "${urls[@]}"; do
+            echo "Benchmarking $url"
+            wrk -t1 -c10 -d10s "$url" >> result.txt
+            echo "Waiting for 10 seconds before the next test..."
+            sleep 10
+          done
 
-      - name: Save Benchmark Results
+      - name: Upload result.txt
         uses: actions/upload-artifact@v2
         with:
           name: benchmark-results
-          path: benchmark-results/results.txt # Path to the directory or file you want to save as an artifact
+          path: result.txt
