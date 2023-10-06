@@ -1,20 +1,36 @@
-name: CI
+name: Lighthouse CI
+
 on: [push]
+
 jobs:
   lhci:
     name: Lighthouse
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: 16.x
-      - name: run Lighthouse CI
+          node-version: 16
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.12.x
+
+      - name: Create Report Directory
+        run: mkdir -p report/lighthouse-report
+
+      - name: Run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.12.x
           lhci healthcheck
-          lhci autorun --config=.github/workflows/.lighthouserc.json || echo "Fail"
+          lhci autorun --config=.github/workflows/.lighthouserc.json
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Archive Lighthouse Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: lighthouse-report
+          path: report/lighthouse-report
