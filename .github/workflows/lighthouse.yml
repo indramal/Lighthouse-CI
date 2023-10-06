@@ -26,8 +26,6 @@ jobs:
         run: |
           lhci healthcheck
           lhci autorun --config=.github/workflows/.lighthouserc.json
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
       - name: Archive Lighthouse Report
         uses: actions/upload-artifact@v2
