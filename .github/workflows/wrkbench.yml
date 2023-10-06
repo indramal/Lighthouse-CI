@@ -1,4 +1,4 @@
-name: WRK Benchmark
+name: WRK Benchmark Test
 
 on:
   push:
